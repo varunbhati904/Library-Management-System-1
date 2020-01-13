@@ -14,7 +14,7 @@ db.on('open',function(err){
 
 
 User=require('./models/user');
-
+Book=require('./models/book');
 app.set('view engine', 'ejs');
 app.use(express.static('static'));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -28,6 +28,35 @@ passport.deserializeUser(User.deserializeUser());
 app.get('/',function(req,res){
 	res.render('index');
 });
+
+app.get('/login',function(req,res){
+	res.render('login');
+});
+
+
+app.get('/register',function(req,res){
+	res.render('register');
+});
+
+
+app.post('/register',function(req,res){
+	User.register(new User({'name':req.body.name,'username':req.body.username,'Email':req.body.email,'DOB':req.body.DOB,'rollnumber':req.body.rollnumber}),req.body.password,function(err){
+		if(err)
+			console.log(err);
+		else{
+			passport.authenticate("local")(req,res,function()
+			{
+				res.render('thankyou');
+			});
+	}}
+	);
+});
+
+
+app.post('/login',passport.authenticate("local",{failureRedirect:'/login'}),function(req,res)	{
+				res.render('index');
+});
+
 
 app.listen(3000,function(err){
 	if(err)
