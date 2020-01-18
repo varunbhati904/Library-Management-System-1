@@ -9,5 +9,5 @@ AccNo : {type:String},
 publisher : {type:String},
 category : {type:String}
 });
-UserSchema.plugin(passportLocalMongoose);
+BookSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model("Book", BookSchema);

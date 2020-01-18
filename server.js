@@ -38,6 +38,9 @@ app.get('/register',function(req,res){
 	res.render('register');
 });
 
+app.get('/issue',function(req,res){
+	res.render('issue');
+});
 
 app.post('/register',function(req,res){
 	User.register(new User({'name':req.body.name,'username':req.body.username,'Email':req.body.email,'DOB':req.body.DOB,'rollnumber':req.body.rollnumber}),req.body.password,function(err){
