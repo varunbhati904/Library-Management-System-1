@@ -4,6 +4,7 @@ ejs=require('ejs'),
 mongoose=require('mongoose'),
 passport=require('passport'),
 bodyParser = require('body-parser'),
+expressSessions = require('express-sessions'),
 LocalStrategy=require('passport-local');
 
 mongoose.connect('mongodb://localhost:27017/sih2020');
@@ -15,6 +16,13 @@ db.on('open',function(err){
 
 User=require('./models/user');
 Book=require('./models/book');
+
+app.use(require('express-session')({
+    secret: "sih2020",
+    resave: false,
+    saveUninitialized: false,
+}));
+
 app.set('view engine', 'ejs');
 app.use(express.static('static'));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -49,6 +57,7 @@ app.post('/register',function(req,res){
 		else{
 			passport.authenticate("local")(req,res,function()
 			{
+				console.log('registered');
 				res.render('thankyou');
 			});
 	}}
