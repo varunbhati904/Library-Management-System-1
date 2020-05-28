@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+<div class="container mt-5">
+  <h1>Register</h1>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Makes POST request to /register route -->
+          <form action="/book" method="POST">
+            <div class="form-group">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name">
+              </div>
+              <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" class="form-control" name="author" >
+              </div>
+              <div class="form-group">
+                <label for="IsBN">ISBN</label>
+                <input type="number" class="form-control" name="ISBN">
+              </div>
+              <div class="form-group">
+                <label for="ShelfNo">ShelfNo</label>
+                <input type="text" class="form-control" name="ShelfNo" >
+              </div>
+              <div class="form-group">
+              <label for="AccNo">AccNo</label>
+              <input type="text" class="form-control" name="AccNo" >
+            </div>
+            <div class="form-group">
+              <label for="publisher">Publisher</label>
+              <input type="text" class="form-control" name="publisher">
+            </div>
+            <div class="form-group">
+              <label for="catagory">Catagory</label>
+              <input type="text" class="form-control" name="branch" list="catagory">
+            </div>
+            <button type="submit" class="btn btn-dark">Register</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<%- include('partials/header') %>
