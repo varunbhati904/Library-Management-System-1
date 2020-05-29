@@ -33,6 +33,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+var date = new Date();
 
 app.get('/',function(req,res){
 	res.render('index');
@@ -52,7 +53,7 @@ app.get('/issue',function(req,res){
 });
 
 app.post('/register',function(req,res){
-	User.register(new User({'name':req.body.name,'username':req.body.username,'Email':req.body.email,'DOB':req.body.DOB,'rollnumber':req.body.rollnumber}),req.body.password,function(err){
+	User.register(new User({'name':req.body.name,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno}),req.body.password,function(err){
 		if(err)
 			console.log(err);
 		else{
@@ -77,11 +78,24 @@ app.post("/login",function(req,res){
 		res.redirect("/login");
 	  } else {
 		passport.authenticate("local") (req,res,function(){
-		  res.redirect("/");
+		  res.render("loginp");
+
 		});
 	  }
 	});
   });
+  app.get("/profile",function(req,res){
+	  if(req.isAuthenticated()){
+		  const user = req.user;
+		  console.log(user);
+		res.render("finep",{user:user});
+
+	  }else{
+		  res.redirect("/login")
+	  }
+
+  });
+
 
 app.post("/issue",function(req,res){
 	var newissue = new Issue({
@@ -123,60 +137,62 @@ app.post("/book",function(req,res){
 app.get("/search",function(req,res){
 	res.render("search");
 });
-app.get("/bookname",function(req,res){
-	res.render("bookn");
-});
-
-app.post("/bookname",function(req,res){
-	const name = req.body.name;
-	Book.find({name: name},function(err,found){
-		if(err){
-			res.send(err);
-		}else{
-			if(found){
-				res.send(found);
-			}else{
-				res.end("Not Found");
-			}
-		}
-	})
-})
-app.get("/authorname",function(req,res){
-	res.render("authorn");
-});
-
-app.post("/authorname",function(req,res){
-	const name = req.body.name;
-	Book.find({author: name},function(err,found){
-		if(err){
-			res.send(err);
-		}else{
-			if(found){
-				res.send(found);
-			}else{
-				res.end("Not Found");
-			}
-		}
-	})
-})
-app.get("/bookauthor",function(req,res){
-	res.render("bookauthor");
-});
-
-app.post("/bookauthor",function(req,res){
-	const name = req.body.bname;
+app.post("/search",function(req,res){
+	const book = req.body.bname;
 	const author = req.body.aname;
-	Book.find({name: name, author: author},function(err,found){
-		if(err){
-			res.send(err);
+	if(!book){
+		if(!author){
+			Book.find({},function(err,found){
+				if(err){
+					console.log(err);
+				}else{
+					if(found){
+						res.send(found);
+					}else{
+						res.send("No book found");
+					}
+				}
+			})
 		}else{
-			if(found){
-				res.send(found);
-			}else{
-				res.end("Not Found");
-			}
+			Book.find({author:author },function(err,found){
+				if(err){
+					console.log(err);
+				}else{
+					if(found){
+						res.send(found);
+					}else{
+						res.send("No book found");
+					}
+				}
+			})
 		}
-	})
+
+	}else if (!author) {
+		Book.find({name:book},function(err,found){
+			if(err){
+				console.log(err);
+			}else{
+				if(found){
+					res.send(found);
+				}else{
+					res.send("No book found");
+				}
+			}
+		})
+	}
+		else{
+		Book.find({name: book, author: author},function(err,found){
+			if(err){
+				console.log(err);
+			}else{
+				if(found){
+					res.send(found);
+				}else{
+					res.send("No book found");
+				}
+			}
+		})
+	}
 })
 
 app.get("/deposit",function(req,res){
@@ -191,8 +207,8 @@ app.post("/deposit",function(req,res){
 		 }else{
 			 res.send("Deposit Succesfully");
 		 }
-	 })
-})
+	 });
+});
 
 
 app.listen(2000,function(err){

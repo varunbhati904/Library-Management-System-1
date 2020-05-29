@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="materialize/css/materialize.css">
 </head>
 <body>
-	<div class="card" style = "position:absolute;height:62.5%;width: 30%; left:35%;top:10%;border-radius: 6px;">
+	<div class="card" style = "position:absolute;height:85.5%;width: 30%; left:35%;top:1.5%;border-radius: 6px;">
 	<div class="row">
 		
 				<div class="row">
@@ -14,10 +14,17 @@
 						<div class="input-field col s6">
 			
 			  				<i class="material-icons prefix">supervisor_account</i>
-						  <input id="name" type="text" class="validate">
-						  <label for="name">Name</label>
+						  <input id="name" type="text" name="name" class="validate">
+						  <label for="name" >Name</label>
 						</div>
 					   </div>
+					   <div class="row">
+						<div class="input-field col s6">
+							<i class="material-icons prefix">assignment_ind</i>
+						  <input id="rollno" type="text" name="rollno" class="validate">
+						  <label for="rollno">Roll Number</label>
+						</div>
+					  </div>
 					  <div class="row">
 						<div class="input-field col s6">
 							<i class="material-icons prefix">account_circle</i>
@@ -35,18 +42,16 @@
 					  <div class="row">
 						<div class="input-field col s6">
 							<i class="material-icons prefix">date_range</i>
-						  <input id="DOB" type="date" name="dob" class="validate">
+						  <input id="DOB" type="date" name="DOB" class="validate">
 						  <label for="DOB">DOB</label>
 						</div>
 					  </div>
 					  <div class="row">
-						<div class="col s12">
-						  <div class="input-field inline">
+						  <div class="input-field col s6">
 							<i class="material-icons prefix">email</i>
 							<input id="email_inline" type="email" name="email" class="validate">
 							<label for="email_inline">Email</label>
 							<span class="helper-text" data-error="wrong" data-success="right"></span>
-						  </div>
 						</div>
 					  </div>
 					  <button class="btn waves-effect waves-light center" type="submit" name="action">Register

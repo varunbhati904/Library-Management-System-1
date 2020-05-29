@@ -1,14 +1,35 @@
 <%- include('partials/header') %>
 
+  <div class="container mt-5">
+    <h1>Search Books by Author and Book Name</h1>
 
-<div class="jumbotron centered">
-  <div class="container">
-    <i class="fas fa-search fa-6x"></i>
-    <h1 class="display-3">Search Books</h1>
-    <hr>
-    <a class="btn btn-light btn-lg" href="/bookname" role="button">By Book Name</a>
-    <a class="btn btn-light btn-lg" href="/authorname" role="button">By Author Name</a><br><br>
-    <a class="btn btn-dark btn-lg" href="/bookauthor" role="button">By Both</a>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="card">
+              <div class="card-body">
+
+                <!-- Makes POST request to /register route -->
+                <form action="/search" method="POST">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="name">Book Name</label>
+                      <input type="text" class="form-control" name="bname">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                          <label for="name">Author Name</label>
+                          <input type="text" class="form-control" name="aname">
+                        </div>
+
+                  <button type="submit" class="btn btn-dark">Search</button>
+                </form>
+
+
+          </div>
+
+
+        </div>
+      </div>
 
 
   </div>
