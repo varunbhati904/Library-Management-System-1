@@ -5,6 +5,6 @@ var IssueSchema = new mongoose.Schema({
 AccNo : {type:String},
 username : {type:String},
 issud_on:{type:Date,default:date},
-Due_on : {type:Date,default:ndate.setDate(ndate.getDate()+ 30)},
+Due_on : {type:Date,default:ndate.setDate(ndate.getDate() + 30)},
 });
 module.exports = mongoose.model("Issue", IssueSchema);

@@ -33,8 +33,10 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-var date = new Date();
-
+var date = new Date(8/8/2020);
+var h = date.getHours();
+var m = date.getMinutes();
+var s = date.getSeconds();
 app.get('/',function(req,res){
 	res.render('index');
 });
@@ -133,7 +135,6 @@ app.post("/book",function(req,res){
 		}
 	})
 });
-
 app.get("/search",function(req,res){
 	res.render("search");
 });
@@ -209,7 +210,31 @@ app.post("/deposit",function(req,res){
 		 }
 	 });
 });
-
+if(h === 12 && m === 0 && s === 0){
+	Issue.find({},function(err,found){
+		if(err){
+			console.log(err);
+		}else{
+			if(found){
+				console.log(found);
+				for(var i=0;i<found.length;i++){
+					if(found[i].Due_on > date){
+						User.findOneAndUpdate({username:found[i].username},{$inc:{Fine: 1}},function(err,user){
+							if(err){
+								console.log(err);
+							}else{
+								if(user){
+									console.log(user);
+							}
+						}
+					})
+				}
+			}
+		}else{
+			res.send("No books are Issued");
+		}
+	}})
+}
 
 app.listen(2000,function(err){
 	if(err)

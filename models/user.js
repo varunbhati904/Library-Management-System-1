@@ -4,7 +4,7 @@ var UserSchema = new mongoose.Schema({
 name :{type:String},
 rollno :{type:String},
 DOB : {type:Date},
-Fine : {type:Number},
+Fine : {type:Number,default:0},
 email : {type:String},
 username : {type:String},
 });
