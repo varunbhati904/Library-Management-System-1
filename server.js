@@ -98,6 +98,21 @@ app.post("/login",function(req,res){
 
   });
 
+	app.get("/issued",function(req,res){
+		if(req.isAuthenticated()){
+			const user = req.user.username;
+			Issue.find({username: user},function(err,books){
+				if(err){
+					console.log(err);
+				}else{
+					if(books){
+						res.send(books);
+					}
+				}
+			})
+		}
+	})
+
 
 app.post("/issue",function(req,res){
 	var newissue = new Issue({
