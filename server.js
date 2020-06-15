@@ -51,7 +51,12 @@ app.get('/register',function(req,res){
 });
 
 app.get('/issue',function(req,res){
-	res.render('issue');
+	if (req.isAuthenticated()) {
+		res.render('issue');
+	}else {
+		res.redirect("/login");
+	}
+
 });
 
 app.post('/register',function(req,res){
@@ -117,7 +122,7 @@ app.post("/login",function(req,res){
 app.post("/issue",function(req,res){
 	var newissue = new Issue({
 		accno: req.body.accno,
-		username: req.body.username
+		username: req.user.username
 	});
 	newissue.save(function(err){
 		if(err){
