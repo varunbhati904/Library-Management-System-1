@@ -7,7 +7,7 @@ bodyParser = require('body-parser'),
 expressSessions = require('express-sessions'),
 LocalStrategy=require('passport-local');
 
-mongoose.connect('mongodb://localhost:27017/sih2020',{useNewUrlParser: true, useUnifiedTopology:true});
+mongoose.connect('mongodb+srv://test:test@cluster0.lq9vw.mongodb.net/libmngmtsys?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology:true});
 var db=mongoose.connection;
 db.on('open',function(err){
 	console.log("connected to db");
@@ -256,9 +256,9 @@ if(h === 12 && m === 0 && s === 0){
 	}})
 }
 
-app.listen(2000,function(err){
+app.listen(process.env.PORT||2000,function(err){
 	if(err)
 		console.log(err);
 	else
-		console.log("Serving on port 2000");
+		console.log("Serving on port 2000",process.env.PORT);
 });
