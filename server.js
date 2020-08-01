@@ -121,7 +121,7 @@ app.post("/login",function(req,res){
 
 app.post("/issue",function(req,res){
 	var newissue = new Issue({
-		accno: req.body.accno,
+		AccNo: req.body.accno,
 		username: req.user.username
 	});
 	newissue.save(function(err){
