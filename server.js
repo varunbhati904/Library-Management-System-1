@@ -92,7 +92,7 @@ app.post("/login",function(req,res){
 		res.redirect("/login");
 	  } else {
 		passport.authenticate("local") (req,res,function(){
-		  res.render("loginp");
+		  res.render("dashboard");
 
 		});
 	  }
