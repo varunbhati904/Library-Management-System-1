@@ -19,6 +19,7 @@ var noteContent = '';
 
 
 recognition.onresult = function(event) {
+	consol.log(event);
 
   var current = event.resultIndex;
 
@@ -49,6 +50,9 @@ recognition.onerror = function(event) {
     instructions.text('No speech was detected. Try again.');  
   };
 }
+
+
+
 
 
 $('#start-record-btn').on('click', function(e) {
