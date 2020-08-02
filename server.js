@@ -58,6 +58,13 @@ app.get('/issue',function(req,res){
 	}
 
 });
+app.get("/dashboard",function(req,res){
+	if (req.isAuthenticated()) {
+		res.render('dashboard');
+	}else{
+		res.redirect("/login");
+	}
+})
 
 app.post('/register',function(req,res){
 	User.register(new User({'name':req.body.name,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno}),req.body.password,function(err){
@@ -128,7 +135,7 @@ app.post("/issue",function(req,res){
 		if(err){
 			console.log(err);
 		}else{
-			res.redirect("/");
+			res.redirect("/dashboard");
 		}
 	});
 	Book.findOneAndUpdate({AccNo:req.body.accno},{Status:"Issued"},function(err){
@@ -156,7 +163,7 @@ app.post("/book",function(req,res){
 		if(err){
 			console.log(err);
 		}else{
-			res.redirect("/");
+			res.redirect("thankyou");
 		}
 	})
 });
