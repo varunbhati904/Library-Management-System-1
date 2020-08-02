@@ -6,6 +6,7 @@ ISBN : {type:Number},
 ShelfNo : {type:String},
 AccNo : {type:String},
 publisher : {type:String},
-category : {type:String}
+category : {type:String},
+Status : {type: String, default:"Available"}
 });
 module.exports = mongoose.model("Book", BookSchema);

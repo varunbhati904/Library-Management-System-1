@@ -50,13 +50,13 @@
         <tbody>
           <% for(var i=0;i<found.length;i++){ %>
           <tr>
-            <td><%found[i].name%></td>
-            <td><%found[i].AccNo%></td>
-            <td><%found[i].author%></td>
-            <td><%found[i].publisher%></td>
-            <td><%found[i].ShelfNo%></td>
-            <td><%found[i].ISBN%></td>
-            <td><%status%></td>
+            <td><%=found[i].name%></td>
+            <td><%=found[i].AccNo%></td>
+            <td><%=found[i].author%></td>
+            <td><%=found[i].publisher%></td>
+            <td><%=found[i].ShelfNo%></td>
+            <td><%=found[i].ISBN%></td>
+            <td><%found[i].Status%></td>
           </tr>
         <%}%>
         </tbody>

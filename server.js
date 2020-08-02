@@ -131,6 +131,11 @@ app.post("/issue",function(req,res){
 			res.redirect("/");
 		}
 	});
+	Book.findOneAndUpdate({AccNo:req.body.accno},{Status:"Issued"},function(err){
+		if(err){
+			console.log(err);
+		}
+	})
 });
 
 app.get("/book",function(req,res){
@@ -168,18 +173,7 @@ app.post("/search",function(req,res){
 					console.log(err);
 				}else{
 					if(found){
-						Issue.find({AccNo: found.AccNo},function(err,issued){
-							if(err){
-								console.log(err);
-							}else{
-								if(issued){
-									res.render('find',{status:"Issued",found:found})
-								}
-								if(!issued){
-									res.render('find',{status:"Available",found:found})
-								}
-							}
-						})
+						res.render('find',{found:found})
 					}else{
 						res.send("No book found");
 					}
@@ -191,18 +185,7 @@ app.post("/search",function(req,res){
 					console.log(err);
 				}else{
 					if(found){
-						Issue.find({AccNo: found.AccNo},function(err,issued){
-							if(err){
-								console.log(err);
-							}else{
-								if(issued){
-									res.render('find',{status:"Issued",found:found})
-								}
-								if(!issued){
-									res.render('find',{status:"Available",found:found})
-								}
-							}
-						})
+						res.render('find',{found:found})
 					}else{
 						res.send("No book found");
 					}
@@ -216,18 +199,7 @@ app.post("/search",function(req,res){
 				console.log(err);
 			}else{
 				if(found){
-					Issue.find({AccNo: found.AccNo},function(err,issued){
-						if(err){
-							console.log(err);
-						}else{
-							if(issued){
-								res.render('find',{status:"Issued",found:found})
-							}
-							if(!issued){
-								res.render('find',{status:"Available",found:found})
-							}
-						}
-					})
+					res.render('find',{found:found})
 				}else{
 					res.send("No book found");
 				}
@@ -240,18 +212,7 @@ app.post("/search",function(req,res){
 				console.log(err);
 			}else{
 				if(found){
-					Issue.find({AccNo: found.AccNo},function(err,issued){
-						if(err){
-							console.log(err);
-						}else{
-							if(issued){
-								res.render('find',{status:"Issued",found:found})
-							}
-							if(!issued){
-								res.render('find',{status:"Available",found:found})
-							}
-						}
-					})
+					res.render('find',{found:found})
 				}else{
 					res.send("No book found");
 				}
