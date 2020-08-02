@@ -110,7 +110,7 @@ app.post("/login",function(req,res){
 
   });
 	app.get('/logout',function(req,res){
-	    req.logout(function(err){
+	    req.session.destroy(function(err){
 	        if(err){
 	            console.log(err);
 	        }
