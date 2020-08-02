@@ -249,12 +249,13 @@ app.post("/deposit",function(req,res){
 		 if(err){
 			 console.log(err);
 		 }else{
-			 res.send("Deposit Succesfully");
+
 			 Book.findOneAndUpdate({AccNo:d},{status:"Available"},function(err){
 				 if(err){
 					 console.log(err);
 				 }
 			 })
+			 res.send("Deposit Succesfully");
 		 }
 	 });
 });
