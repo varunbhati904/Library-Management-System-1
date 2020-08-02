@@ -168,7 +168,18 @@ app.post("/search",function(req,res){
 					console.log(err);
 				}else{
 					if(found){
-						res.send(found);
+						Issue.find({AccNo: found.AccNo},function(err,issued){
+							if(err){
+								console.log(err);
+							}else{
+								if(issued){
+									res.render('find',{status:"Issued",found:found})
+								}
+								if(!issued){
+									res.render('find',{status:"Available",found:found})
+								}
+							}
+						})
 					}else{
 						res.send("No book found");
 					}
@@ -180,7 +191,18 @@ app.post("/search",function(req,res){
 					console.log(err);
 				}else{
 					if(found){
-						res.send(found);
+						Issue.find({AccNo: found.AccNo},function(err,issued){
+							if(err){
+								console.log(err);
+							}else{
+								if(issued){
+									res.render('find',{status:"Issued",found:found})
+								}
+								if(!issued){
+									res.render('find',{status:"Available",found:found})
+								}
+							}
+						})
 					}else{
 						res.send("No book found");
 					}
@@ -194,7 +216,18 @@ app.post("/search",function(req,res){
 				console.log(err);
 			}else{
 				if(found){
-					res.send(found);
+					Issue.find({AccNo: found.AccNo},function(err,issued){
+						if(err){
+							console.log(err);
+						}else{
+							if(issued){
+								res.render('find',{status:"Issued",found:found})
+							}
+							if(!issued){
+								res.render('find',{status:"Available",found:found})
+							}
+						}
+					})
 				}else{
 					res.send("No book found");
 				}
@@ -207,7 +240,18 @@ app.post("/search",function(req,res){
 				console.log(err);
 			}else{
 				if(found){
-					res.send(found);
+					Issue.find({AccNo: found.AccNo},function(err,issued){
+						if(err){
+							console.log(err);
+						}else{
+							if(issued){
+								res.render('find',{status:"Issued",found:found})
+							}
+							if(!issued){
+								res.render('find',{status:"Available",found:found})
+							}
+						}
+					})
 				}else{
 					res.send("No book found");
 				}
