@@ -102,14 +102,25 @@ app.post("/login",function(req,res){
 	  if(req.isAuthenticated()){
 		  const user = req.user;
 		  console.log(user);
-		res.render("finep",{user:user});
+		res.render("profile",{user:user});
 
 	  }else{
 		  res.redirect("/login")
 	  }
 
   });
+	app.get('/logout',function(req,res){
+	    req.session.destroy(function(err){
+	        if(err){
+	            console.log(err);
+	        }
+	        else
+	        {
+	            res.redirect('/');
+	        }
+	    });
 
+	});
 	app.get("/issued",function(req,res){
 		if(req.isAuthenticated()){
 			const user = req.user.username;
@@ -238,7 +249,15 @@ app.post("/deposit",function(req,res){
 		 if(err){
 			 console.log(err);
 		 }else{
-			 res.send("Deposit Succesfully");
+	
+			 Book.findOneAndUpdate({AccNo:d},{Status:"Available"},function(err,found){
+				 console.log("ok");
+				 if(err){
+					 console.log(err);
+				 }
+				 console.log(found);
+			 })
+			 res.render("thankyou");
 		 }
 	 });
 });
