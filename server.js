@@ -102,14 +102,25 @@ app.post("/login",function(req,res){
 	  if(req.isAuthenticated()){
 		  const user = req.user;
 		  console.log(user);
-		res.render("finep",{user:user});
+		res.render("profile",{user:user});
 
 	  }else{
 		  res.redirect("/login")
 	  }
 
   });
+	app.get('/logout',function(req,res){
+	    req.logout(function(err){
+	        if(err){
+	            console.log(err);
+	        }
+	        else
+	        {
+	            res.redirect('/');
+	        }
+	    });
 
+	});
 	app.get("/issued",function(req,res){
 		if(req.isAuthenticated()){
 			const user = req.user.username;
