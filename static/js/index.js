@@ -19,7 +19,7 @@ var aunoteContent = '';
 // Get all notes from previous sessions and display them.
 
 
-recognition.onresult = function(event) {
+aurecognition.onresult = function(event) {
 	consol.log(event);
 
   var current = event.resultIndex;
@@ -38,15 +38,15 @@ recognition.onresult = function(event) {
   }
 };
 
-recognition.onstart = function() { 
+aurecognition.onstart = function() { 
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
 }
 
-recognition.onspeechend = function() {
+aurecognition.onspeechend = function() {
   instructions.text('You were quiet for a while so voice recognition turned itself off.');
 }
 
-recognition.onerror = function(event) {
+aurecognition.onerror = function(event) {
   if(event.error == 'no-speech') {
     instructions.text('No speech was detected. Try again.');  
   };
