@@ -11,22 +11,37 @@
 
 
 <%- include('partials/navbar') %>
-
+<br><br><br>
   <div class="row">
-    <form class="col s8 offset-s2">
+    <form class="col s8 offset-s2" action="/search" method="post">
+      <h3 style="text-align: center;color: teal;text-decoration: underline;"><b>Search Books </b></h3><br><br>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="note-textarea" class="materialize-textarea" autofocus></textarea>
-          <label for="note-textarea">Search</label>
+          <textarea id="note-textarea" class="materialize-textarea" name="bname" autofocus></textarea>
+          <label for="note-textarea">Book Name</label>
         </div>
       </div>
-    </form>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="note-textarea" class="materialize-textarea" name="aname"autofocus></textarea>
+          <label for="note-textarea">Author Name</label>
+        </div>
+      </div>
+
   </div>
   <div class='row'>
   <button id='start-record-btn' class='waves-effect waves-light btn col s1 offset-s5'>Start</button>
-<div id="recording-instructions"></div>
-<button id=''>Pause</button>
+
+<button id='' class='waves-effect waves-light btn col s1 ' style="margin-left: 10px;">Pause</button>
+<br>
+<br>
+<br>
+<center><button class="btn waves-effect waves-light" type="submit" name="action" style="margin-right: 10px;">Submit
+  <i class="material-icons right">send</i>
+</button>
+</center>
 </div>
+</form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src='js/index.js'></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
