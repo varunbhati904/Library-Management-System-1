@@ -20,7 +20,8 @@ var aunoteContent = '';
 
 
 aurecognition.onresult = function(event) {
-	consol.log(event);
+	console.log(event);
+	console.log(aunoteTextarea);
 
   var current = event.resultIndex;
 
@@ -34,7 +35,7 @@ aurecognition.onresult = function(event) {
 
   if(!mobileRepeatBug) {
     noteContent += transcript;
-    noteTextarea.val(noteContent);
+    aunoteTextarea.val(noteContent);
   }
 };
 
@@ -95,7 +96,7 @@ var noteContent = '';
 
 
 recognition.onresult = function(event) {
-	consol.log(event);
+	console.log(event);
 
   var current = event.resultIndex;
 
