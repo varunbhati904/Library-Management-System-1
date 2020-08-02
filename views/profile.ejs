@@ -6,6 +6,9 @@
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
+
+    <body>
+
 <nav>
 
   <div class="nav-wrapper teal lighten-2">
@@ -30,10 +33,24 @@
       <div class="card">
         <div class="card-body">
                 <div class="form-group">
-                <h4>Roll No.: <%=user.rollno%></h4>
-                <h4>DOB: <%=user.DOB%></h4>
-                <h4>Email: <%=user.email%></h4>
-                <h4>Fine: <%=user.Fine%></h4>
+                  <table>
+                    <tr>
+                      <td>Roll Number:</td>
+                      <td><%=user.rollno%></td>
+                    </tr>
+                    <tr>
+                      <td>Date Of Birth:</td>
+                      <td><%=user.DOB%></td>
+                    </tr>
+                    <tr>
+                      <td>Email:</td>
+                      <td><%=user.email%></td>
+                    </tr>
+                    <tr>
+                      <td>Fine:</td>
+                      <td><%=user.Fine%></td>
+                    </tr>
+                  </table>
               </div>
 
         </div>
