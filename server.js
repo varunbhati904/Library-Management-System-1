@@ -250,6 +250,11 @@ app.post("/deposit",function(req,res){
 			 console.log(err);
 		 }else{
 			 res.send("Deposit Succesfully");
+			 Book.findOneAndUpdate({AccNo:d},{status:"Available"},function(err){
+				 if(err){
+					 console.log(err);
+				 }
+			 })
 		 }
 	 });
 });
