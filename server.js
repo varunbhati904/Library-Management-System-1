@@ -111,7 +111,7 @@ app.post("/login",function(req,res){
 					console.log(err);
 				}else{
 					if(books){
-						res.send(books);
+						res.render('issued',{found:books});
 					}
 				}
 			})
