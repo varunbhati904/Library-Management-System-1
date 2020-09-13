@@ -181,11 +181,17 @@ app.post("/issue",function(req,res){
 
 app.post("/issueapi",function(req,res){
 	console.log(req.body,req.accno);
+	var name;
+	
+	Book.findOne({AccNo:req.body.accno} ,function(err,re){
+		name=re.name
 
 	var newissue = new Issue({
 		AccNo: req.body.accno,
-		username: req.user.username
-	});
+		username: req.user.username,
+		name:name
+	})
+	
 	
 	if(!req.user||(!req.body.accno)){
 	return res.status(401).send("unauthorized")
@@ -216,6 +222,7 @@ app.post("/issueapi",function(req,res){
 	}
 	
 	})
+	});
 
 	
 	
@@ -317,7 +324,7 @@ app.post("/deposit",function(req,res){
 			res.status(400).send({err:err});
 		 }else{
 	
-			 Book.findOneAndUpdate({AccNo:d},{Status:"Available"},function(err,found){
+			 Book.findOneAndUpdate({AccNo:d},{Status:"Available",IssuedTo:" "},function(err,found){
 				 console.log("ok");
 				 if(err){
 					 console.log(err);

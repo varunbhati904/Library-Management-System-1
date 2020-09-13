@@ -39,8 +39,9 @@
       <table  class="responsive-table centered striped">
         <thead>
           <tr>
-              <th>Username</th>
+              
               <th>ACCOUNT NUMBER</th>
+		<th>Name</th>
               <th>Issued On</th>
               <th>Due On</th>
           </tr>
@@ -49,8 +50,9 @@
         <tbody>
           <% for(var i=0;i<found.length;i++){ %>
           <tr>
-            <td><%=found[i].username%></td>
+            
             <td><%=found[i].AccNo%></td>
+		<td><%=found[i].name%></td>
             <td><%=found[i].issud_on%></td>
             <td><%=found[i].Due_on%></td>
           </tr>
