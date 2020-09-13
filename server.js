@@ -142,18 +142,84 @@ app.post("/issue",function(req,res){
 		AccNo: req.body.accno,
 		username: req.user.username
 	});
-	newissue.save(function(err){
-		if(err){
-			console.log(err);
-		}else{
-			res.redirect("/dashboard");
-		}
+
+	if(!req.user||(!req.body.accno)){
+	return res.status(401).send("unauthorized")
+	}
+
+	Book.findOne({AccNo:req.body.accno},function(err,re){
+	if((!re)||re.Status=="Issued")
+	return res.status(401).send("Alredy Issued");
 	});
 	Book.findOneAndUpdate({AccNo:req.body.accno},{Status:"Issued"},function(err){
 		if(err){
 			console.log(err);
+			res.status(400).send({err:err});
 		}
+		else if(book.Status=="Issued")
+		res.status(401).send("already issued");
+	else{
+	newissue.save(function(err){
+		if(err){
+			console.log(err);
+			res.status(400).send({err:err});
+		}
+		else if(!book)
+		res.status(404).send("No such book Found");
+		else{
+			if(book.Status=="Available")
+			res.status(200).send({status:"issued",book:book});
+			else
+			res.status(401).send("already issued");
+		}
+	});
+	}	
+	
+	
 	})
+});
+
+app.post("/issueapi",function(req,res){
+	console.log(req.body,req.accno);
+
+	var newissue = new Issue({
+		AccNo: req.body.accno,
+		username: req.user.username
+	});
+	
+	if(!req.user||(!req.body.accno)){
+	return res.status(401).send("unauthorized")
+	}
+	
+	Book.findOneAndUpdate({AccNo:req.body.accno},{Status:"Issued"},function(err,book){
+		if(err){
+			console.log(err);
+		}
+
+		else if(book.Status=="Issued")
+		res.status(401).send("already issued");
+	else{
+	newissue.save(function(err){
+		if(err){
+			console.log(err);
+			res.status(400).send({err:err});
+		}
+		else if(!book)
+		res.status(404).send("No such book Found");
+		else{
+			if(book.Status=="Available")
+			res.status(200).send({status:"issued",book:book});
+			else
+			res.status(401).send("already issued");
+		}
+	});
+	}
+	
+	})
+
+	
+	
+	
 });
 
 app.get("/book",function(req,res){
@@ -248,6 +314,7 @@ app.post("/deposit",function(req,res){
      Issue.deleteOne({AccNo: d},function(err){
 		 if(err){
 			 console.log(err);
+			res.status(400).send({err:err});
 		 }else{
 	
 			 Book.findOneAndUpdate({AccNo:d},{Status:"Available"},function(err,found){
@@ -256,8 +323,9 @@ app.post("/deposit",function(req,res){
 					 console.log(err);
 				 }
 				 console.log(found);
+				res.send(found);		
 			 })
-			 res.render("thankyou");
+			 
 		 }
 	 });
 });

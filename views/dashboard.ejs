@@ -10,7 +10,8 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-      <!--Let browser know website is optimized for mobile-->
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 <body>
@@ -72,9 +73,25 @@ height: 50px;
       <br>
       <br>
       <br>
-
-      <a class="btn btn-light btn-lg" href="/profile" role="button">Profile</a>
-      <a class="btn btn-light btn-lg" href="/issued" role="button">Issued Books</a><br><br>
+	  
+	  <div class="row">
+	  <div class="card col s6 offset-s3">
+	<br>
+	<br>
+	<div class="row">
+      <a class="yellow lighten-1 white-text card col tiny s2 offset-s2" href="/profile" role="button"><i class="material-icons prefix">person_outline</i>Profile<br>&nbsp</a>
+	  <a class="yellow lighten-1 white-text  card col tiny s2 offset-s1" href="/issue" role="button"><i class="material-icons">add</i><br>Issue<br>&nbsp</a>
+	  <a class="yellow lighten-1 white-text  card col tiny s2 offset-s1" href="/issued" role="button"><i class="material-icons">book</i><br>Issued Books</a><br><br>
+	  </div>
+	  
+	  <div class="row">
+	  <a class="yellow lighten-1 white-text  card col tiny s2 offset-s5" href="/logout" role="button"><i class="material-icons">lock</i><br>Logout<br>&nbsp</a>
+	  
+	  
+	  </div>
+      
+	  </div>
+	  </div>
     </center>
 
 
