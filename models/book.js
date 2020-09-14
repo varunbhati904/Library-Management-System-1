@@ -9,4 +9,6 @@ publisher : {type:String},
 category : {type:String},
 Status : {type: String, default:"Available"}
 });
+
+
 module.exports = mongoose.model("Book", BookSchema);
