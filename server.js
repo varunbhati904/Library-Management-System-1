@@ -298,7 +298,7 @@ app.post("/search",function(req,res){
 		})
 	}
 		else{
-		Book.find({name: book, author: author},function(err,found){
+		Book.find({name:new RegExp(book,'i'),author:new RegExp(author,'i')},function(err,found){
 			if(err){
 				console.log(err);
 			}else{
