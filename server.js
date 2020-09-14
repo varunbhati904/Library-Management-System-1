@@ -173,16 +173,16 @@ app.post("/issue",function(req,res){
 			res.status(401).send("already issued");
 		}
 	});
-	}	
-	
-	
+	}
+
+
 	})
 });
 
 app.post("/issueapi",function(req,res){
 	console.log(req.body,req.accno);
 	var name;
-	
+
 	Book.findOne({AccNo:req.body.accno} ,function(err,re){
 		name=re.name
 
@@ -191,12 +191,12 @@ app.post("/issueapi",function(req,res){
 		username: req.user.username,
 		name:name
 	})
-	
-	
+
+
 	if(!req.user||(!req.body.accno)){
 	return res.status(401).send("unauthorized")
 	}
-	
+
 	Book.findOneAndUpdate({AccNo:req.body.accno},{Status:"Issued"},function(err,book){
 		if(err){
 			console.log(err);
@@ -220,13 +220,13 @@ app.post("/issueapi",function(req,res){
 		}
 	});
 	}
-	
+
 	})
 	});
 
-	
-	
-	
+
+
+
 });
 
 app.get("/book",function(req,res){
@@ -247,7 +247,7 @@ app.post("/book",function(req,res){
 		if(err){
 			console.log(err);
 		}else{
-			res.redirect("thankyou");
+			res.render("thankyou");
 		}
 	})
 });
@@ -323,16 +323,16 @@ app.post("/deposit",function(req,res){
 			 console.log(err);
 			res.status(400).send({err:err});
 		 }else{
-	
+
 			 Book.findOneAndUpdate({AccNo:d},{Status:"Available",IssuedTo:" "},function(err,found){
 				 console.log("ok");
 				 if(err){
 					 console.log(err);
 				 }
 				 console.log(found);
-				res.send(found);		
+				res.send(found);
 			 })
-			 
+
 		 }
 	 });
 });
