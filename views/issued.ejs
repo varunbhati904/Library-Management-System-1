@@ -12,9 +12,9 @@
       <nav>
 
         <div class="nav-wrapper teal lighten-2">
-          <a href="#!" class="brand-logo">COSMOS</a>
+          <a href="/" class="brand-logo">Cosmos</a>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          <a href="#" class="right hide-on-med-and-down brand-logo center brand-logo center ">LIBRARY MANAGEMENT SYSTEM</a>
+          <a  class="right hide-on-med-and-down brand-logo center brand-logo center ">LIBRARY MANAGEMENT SYSTEM</a>
            <ul class="right hide-on-med-and-down">
         <li><a href="/dashboard"><i class="material-icons right">developer_board</i>Dashboard</a></li>
         <li><a href="/logout"><i class="material-icons right">lock_open</i>Sign Out</a></li>
@@ -39,7 +39,7 @@
       <table  class="responsive-table centered striped">
         <thead>
           <tr>
-              
+
               <th>ACCOUNT NUMBER</th>
 		<th>Name</th>
               <th>Issued On</th>
@@ -50,7 +50,7 @@
         <tbody>
           <% for(var i=0;i<found.length;i++){ %>
           <tr>
-            
+
             <td><%=found[i].AccNo%></td>
 		<td><%=found[i].name%></td>
             <td><%=found[i].issud_on%></td>
