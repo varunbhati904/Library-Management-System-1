@@ -44,7 +44,8 @@ xhttp.send(data);
 }
 </script>
 
-
+<div class="row">
+<div class="col s4">
         <div class="container mt-5">
             <h1>Issue</h1>
         <div class="row">
@@ -66,6 +67,18 @@ xhttp.send(data);
             </div>
           </div>
         </div>
+</div>
+<div class="col">
+<div>
+<table id="issue" class="responsive striped">
+<thead><tr><th>Name</th><th>Account No</th>
+<th>Author</th></tr>
+</thead>
+</table>
+</div>
+</div>
+
+</div>
 
 <br>
 <h2>Or Scan QR Code</h2>
@@ -90,13 +103,8 @@ xhttp.send(data);
 
 
   </div>
-<div>
-<table id="issue" class="striped">
-<thead><tr><th>Name</th><th>Account No</th>
-<th>Author</th></tr>
-</thead>
-</table>
+
 </div>
-</div>
+
 
 <%- include('partials/footer') %>
