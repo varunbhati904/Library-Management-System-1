@@ -1,23 +1,8 @@
 <%- include('partials/header') %>
 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> 
 
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #ffffff;
-}
-</style>
 <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 <script>
 
@@ -106,7 +91,7 @@ xhttp.send(data);
 
   </div>
 <div>
-<table id="issue">
+<table class="responsive" id="issue">
 <tr><td>Name</td><td>Account No</td>
 <td>Author</td></tr>
 </table>

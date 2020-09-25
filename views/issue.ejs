@@ -15,6 +15,13 @@ t.innerHTML+="<tr><td>"+resp.book.AccNo+"</td><td>"+resp.book.name+"</td><td>"+r
 
 }
 
+function print(){
+var a=document.getElementById("recipt");
+var printWindow=window.open('window','Recipt','height=400,width=400')
+printWindow.document.write(a.innerHTML);
+
+}
+
 function send(acc){
 
 
@@ -69,13 +76,19 @@ xhttp.send(data);
         </div>
 </div>
 <div class="col">
-<div>
+<div id="recipt">
+<b>Roll No</b>:<%=req.user.rollno%><br>
+<b>Name</b>:<%=req.user.name%>
+<b>Username</b>:<%=req.user.username%><br>
+<b>Date</b>:<%=new Date().toDateString()%>
 <table id="issue" class="responsive striped">
-<thead><tr><th>Name</th><th>Account No</th>
+<thead><tr>
+<th>Account No</th><th>Name</th>
 <th>Author</th></tr>
 </thead>
 </table>
 </div>
+<button onclick="print()">Checkout</button>
 </div>
 
 </div>
