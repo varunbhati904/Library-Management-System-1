@@ -1,52 +1,68 @@
 <%- include('partials/header') %>
-<div class="container mt-5">
-  <h1>Register</h1>
+  <%- include('partials/navbar') %>
+	<div class="card" style = "position:absolute;height:93.5%;width: 30%; left:35%;top:26%;border-radius: 6px;">
+	<div class="row">
 
-  <div class="row">
-    <div class="col-sm-8">
-      <div class="card">
-        <div class="card-body">
-
-          <!-- Makes POST request to /register route -->
-          <form action="/book" method="POST">
-            <div class="form-group">
-              <div class="form-group">
+				<div class="row">
+					<form class="col s12" action='/book' method='POST'>
+					  <div class="row">
+						<div class="input-field col s6">
+            <i class="material-icons prefix">book</i>
                 <label for="name">Name</label>
                 <input type="text" class="form-control" name="name">
               </div>
-              <div class="form-group">
+  					   </div>
+  					   <div class="row">
+  						<div class="input-field col s6">
+                <i class="material-icons prefix">supervisor_account</i>
                 <label for="author">Author</label>
                 <input type="text" class="form-control" name="author" >
               </div>
-              <div class="form-group">
+  					   </div>
+  					   <div class="row">
+  						<div class="input-field col s6">
+                <i class="material-icons prefix">view_list</i>
                 <label for="IsBN">ISBN</label>
                 <input type="number" class="form-control" name="ISBN">
               </div>
-              <div class="form-group">
+  					   </div>
+  					   <div class="row">
+  						<div class="input-field col s6">
+                <i class="material-icons prefix">view_list</i>
                 <label for="ShelfNo">ShelfNo</label>
                 <input type="text" class="form-control" name="ShelfNo" >
               </div>
-              <div class="form-group">
+  					   </div>
+  					   <div class="row">
+  						<div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
               <label for="AccNo">AccNo</label>
               <input type="text" class="form-control" name="AccNo" >
             </div>
-            <div class="form-group">
+					   </div>
+					   <div class="row">
+						<div class="input-field col s6">
+              <i class="material-icons prefix">print</i>
               <label for="publisher">Publisher</label>
               <input type="text" class="form-control" name="publisher">
             </div>
-            <div class="form-group">
+					   </div>
+					   <div class="row">
+						<div class="input-field col s6">
+              <i class="material-icons prefix">class</i>
               <label for="catagory">Catagory</label>
               <input type="text" class="form-control" name="branch" list="catagory">
             </div>
-            <button type="submit" class="btn btn-dark">Register</button>
+					  </div>
+					  <button class="btn waves-effect waves-light center" type="submit" name="action">Register
+						<i class="material-icons right">send</i>
+					  </button>
           </form>
+				  </div>
+			</div>
+		  </div>
 
-        </div>
-      </div>
-    </div>
-
-
-  </div>
-</div>
-
-<%- include('partials/header') %>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+	</script>
+</body>
+</html>
