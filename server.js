@@ -52,7 +52,7 @@ app.get('/register',function(req,res){
 
 app.get('/issue',function(req,res){
 	if (req.isAuthenticated()) {
-		res.render('issue');
+		res.render('issue',{req});
 	}else {
 		res.redirect("/login");
 	}
