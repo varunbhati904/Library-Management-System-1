@@ -80,6 +80,14 @@ app.post('/register',function(req,res){
 	);
 });
 
+app.get("/all_users",function(req,res){
+	User.find({},function(err,users){
+		if(!err)
+		res.send(users);
+		else
+		res.send("err occured");
+});
+});
 
 app.post("/login",function(req,res){
 	const user = new User({
