@@ -53,8 +53,8 @@
 
             <td><%=found[i].AccNo%></td>
 		<td><%=found[i].name%></td>
-            <td><%=found[i].issud_on%></td>
-            <td><%=found[i].Due_on%></td>
+            <td><%=found[i].issud_on.toDateString()%></td>
+            <td><%=found[i].Due_on.toDateString()%></td>
           </tr>
         <%}%>
         </tbody>
