@@ -321,7 +321,7 @@ app.post("/search",function(req,res){
 })
 
 app.get("/deposit",function(req,res){
-	res.render("deposit",req);
+	res.render("deposit",{req});
 });
 
 app.post("/deposit",function(req,res){
