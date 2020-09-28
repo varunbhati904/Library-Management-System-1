@@ -38,16 +38,16 @@ var h = date.getHours();
 var m = date.getMinutes();
 var s = date.getSeconds();
 app.get('/',function(req,res){
-	res.render('index');
+	res.render('index',{req});
 });
 
 app.get('/login',function(req,res){
-	res.render('login');
+	res.render('login',{req});
 });
 
 
 app.get('/register',function(req,res){
-	res.render('register');
+	res.render('register',{req});
 });
 
 app.get('/issue',function(req,res){
@@ -60,7 +60,7 @@ app.get('/issue',function(req,res){
 });
 app.get("/dashboard",function(req,res){
 	if (req.isAuthenticated()) {
-		res.render('dashboard');
+		res.render('dashboard',{req});
 	}else{
 		res.redirect("/login");
 	}
@@ -74,7 +74,7 @@ app.post('/register',function(req,res){
 			passport.authenticate("local")(req,res,function()
 			{
 				console.log('registered');
-				res.render('thankyou');
+				res.render('thankyou',{req});
 			});
 	}}
 	);
@@ -100,7 +100,7 @@ app.post("/login",function(req,res){
 		res.redirect("/login");
 	  } else {
 		passport.authenticate("local") (req,res,function(){
-		  res.render("dashboard");
+		  res.render("dashboard",{req});
 
 		});
 	  }
@@ -110,7 +110,7 @@ app.post("/login",function(req,res){
 	  if(req.isAuthenticated()){
 		  const user = req.user;
 		  console.log(user);
-		res.render("profile",{user:user});
+		res.render("profile",{user:user,req});
 
 	  }else{
 		  res.redirect("/login")
@@ -137,7 +137,7 @@ app.post("/login",function(req,res){
 					console.log(err);
 				}else{
 					if(books){
-						res.render('issued',{found:books});
+						res.render('issued',{found:books,req});
 					}
 				}
 			})
@@ -255,12 +255,12 @@ app.post("/book",function(req,res){
 		if(err){
 			console.log(err);
 		}else{
-			res.render("thankyou");
+			res.render("thankyou",{req});
 		}
 	})
 });
 app.get("/search",function(req,res){
-	res.render("search");
+	res.render("search",{req});
 });
 app.post("/search",function(req,res){
 	const book = req.body.bname;
@@ -272,7 +272,7 @@ app.post("/search",function(req,res){
 					console.log(err);
 				}else{
 					if(found){
-						res.render('find',{found:found})
+						res.render('find',{found:found,req})
 					}else{
 						res.send("No book found");
 					}
@@ -284,7 +284,7 @@ app.post("/search",function(req,res){
 					console.log(err);
 				}else{
 					if(found){
-						res.render('find',{found:found})
+						res.render('find',{found:found,req})
 					}else{
 						res.send("No book found");
 					}
@@ -298,7 +298,7 @@ app.post("/search",function(req,res){
 				console.log(err);
 			}else{
 				if(found){
-					res.render('find',{found:found})
+					res.render('find',{found:found,req})
 				}else{
 					res.send("No book found");
 				}
@@ -311,7 +311,7 @@ app.post("/search",function(req,res){
 				console.log(err);
 			}else{
 				if(found){
-					res.render('find',{found:found})
+					res.render('find',{found:found,req})
 				}else{
 					res.send("No book found");
 				}
@@ -321,7 +321,7 @@ app.post("/search",function(req,res){
 })
 
 app.get("/deposit",function(req,res){
-	res.render("deposit");
+	res.render("deposit",req);
 });
 
 app.post("/deposit",function(req,res){
