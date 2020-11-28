@@ -60,15 +60,11 @@ app.get('/issue',function(req,res){
 });
 app.get("/dashboard",function(req,res){
 	if (req.isAuthenticated()) {
-<<<<<<< HEAD
 		if(req.user.role === "Admin")
 		res.render("adminDashboard");
 		else {
 			res.render("dashboard");
 		}
-=======
-		res.render('dashboard',{req});
->>>>>>> 9ab50d5b20a465e99490cb13f6e3859be28312a1
 	}else{
 		res.redirect("/login");
 	}
@@ -108,12 +104,8 @@ app.post("/login",function(req,res){
 		res.redirect("/login");
 	  } else {
 		passport.authenticate("local") (req,res,function(){
-<<<<<<< HEAD
-			res.redirect("/dashboard");
-=======
-		  res.render("dashboard",{req});
+		  res.redirect("/dashboard");
 
->>>>>>> 9ab50d5b20a465e99490cb13f6e3859be28312a1
 		});
 	  }
 	});
