@@ -1,16 +1,16 @@
 <html>
 <head>
-	<title>Library Managemant System</title>
+	<title>Library Management System</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="materialize/css/materialize.css">
 </head>
 <body>
 	<%- include('partials/navbar') %>
-	<div class="card" style = "position:absolute;height:25%;width: 30%; left:35%;top:22%;border-radius: 6px;">
+	<div class="card" style = "position:absolute;height:30%;width: 30%; left:35%;top:26%;border-radius: 6px;">
 	<div class="row">
 
 				<div class="row">
-					<form class="col s12" action='/login' method='POST'>
+					<form class="col s12" action='/register' method='POST'>
 					  <div class="row">
 						<div class="input-field col s6">
 							<i class="material-icons prefix">account_circle</i>
@@ -18,15 +18,11 @@
 						  <label for="Username">Username</label>
 						</div>
 					  </div>
-					  <div class="row">
-						<div class="input-field col s6">
-							<i class="material-icons prefix">fingerprint</i>
-						  <input id="password" type="password"  name="password"class="validate">
-						  <label for="password">Password</label>
-						</div>
-					  </div>
-					  <button class="btn waves-effect waves-light center" type="submit" name="action">login
-						<i class="material-icons right">lock_open</i>
+					  <button class="btn waves-effect waves-light center" type="submit" name="action">Delete
+						<i class="material-icons right">send</i>
+					  </button>
+					  <button class="btn waves-effect waves-light center" type="reset" name="action">Reset
+						<i class="material-icons right">loop</i>
 					  </button>
 					</form>
 				  </div>

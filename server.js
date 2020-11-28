@@ -60,14 +60,18 @@ app.get('/issue',function(req,res){
 });
 app.get("/dashboard",function(req,res){
 	if (req.isAuthenticated()) {
-		res.render('dashboard');
+		if(req.user.role === "Admin")
+		res.render("adminDashboard");
+		else {
+			res.render("dashboard");
+		}
 	}else{
 		res.redirect("/login");
 	}
 })
 
 app.post('/register',function(req,res){
-	User.register(new User({'name':req.body.name,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno}),req.body.password,function(err){
+	User.register(new User({'name':req.body.name,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role}),req.body.password,function(err){
 		if(err)
 			console.log(err);
 		else{
@@ -100,12 +104,34 @@ app.post("/login",function(req,res){
 		res.redirect("/login");
 	  } else {
 		passport.authenticate("local") (req,res,function(){
-		  res.render("dashboard");
-
+			res.redirect("/dashboard");
 		});
 	  }
 	});
   });
+
+
+
+	app.get('/deleteUser', function(req,res){
+		if(req.isAuthenticated()){
+			res.render("delete");
+		}
+		else {
+			res.redirect("/login");
+		}
+	})
+
+app.post('/deleteUser', function(req,res){
+	const username = req.body.username;
+	User.deleteOne({username: username}, function(err){
+		if(err)
+		console.log(err);
+		else {
+			res.send("Deleted Successfully!");
+		}
+	})
+})
+
   app.get("/profile",function(req,res){
 	  if(req.isAuthenticated()){
 		  const user = req.user;

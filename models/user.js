@@ -7,6 +7,7 @@ DOB : {type:Date},
 Fine : {type:Number,default:0},
 email : {type:String},
 username : {type:String},
+role: String
 });
 UserSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model("User", UserSchema);
