@@ -47,7 +47,11 @@ app.get('/login',function(req,res){
 
 
 app.get('/register',function(req,res){
+	//if(req.isAuthenticated())
 	res.render('register',{req});
+	//else {
+		//res.redirect('/login');
+//	}
 });
 
 app.get('/issue',function(req,res){
@@ -63,7 +67,7 @@ app.get("/dashboard",function(req,res){
 		if(req.user.role === "Admin")
 		res.render("adminDashboard");
 		else {
-			res.render("dashboard");
+			res.render("dashboard",{req});
 		}
 	}else{
 		res.redirect("/login");
@@ -115,7 +119,7 @@ app.post("/login",function(req,res){
 
 	app.get('/deleteUser', function(req,res){
 		if(req.isAuthenticated()){
-			res.render("delete");
+			res.render("delete",{req});
 		}
 		else {
 			res.redirect("/login");
@@ -265,7 +269,7 @@ app.post("/issueapi",function(req,res){
 });
 
 app.get("/book",function(req,res){
-	res.render("book");
+	res.render("book",{req});
 });
 
 app.post("/book",function(req,res){
