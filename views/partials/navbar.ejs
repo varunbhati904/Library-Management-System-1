@@ -2,15 +2,43 @@
 <nav>
     <div class="nav-wrapper teal lighten-2">
       <a href="/" class="brand-logo">Cosmos</a>
-      <a  class="right hide-on-med-and-down brand-logo center brand-logo center ">LIBRARY MANAGEMENT SYSTEM</a>
+      <a  class="right show-on-large hide-on-med-and-down brand-logo center brand-logo center ">LIBRARY MANAGEMENT SYSTEM</a>
+	
       <ul class="right hide-on-med-and-down">
+	<%if(req.user){%>
+	<li><a class="waves-effect" href="/profile">Profile</a></li>
+	<li><a class="waves-effect" href="/dashboard">Dashboard</a></li>
+    	<li><a class="waves-effect" href="/logout">Logout</a></li>
+	<%} else{%>
         <li><a href="/login"><i class="material-icons right">lock</i>Login</a></li>
         <li><a href="/register"><i class="material-icons right">cloud_upload</i>Register</a></li>
+	<%}%>
       </ul>
+
     </div>
   </nav>
-  <ul class="sidenav" id="mobile-demo">
-    <a href="#" class="brand-logo center ">LIBRARY MANAGEMENT SYSTEM</a>
+
+<ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      
+      
+      <a href="#name"><span class="white-text name">John Doe</span></a>
+      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div></li>
+    <%if(req.user){%>
+	<li><a class="waves-effect" href="/dashboard">Dashboard</a></li>
+    <li><a class="waves-effect" href="/logout">Logout</a></li>
+	<%}%>
+    <li><a class="waves-effect" href="/login">Login</a></li>
+    <li><a class="waves-effect" href="/register">Register</a></li>
+    <li><a class="waves-effect" href="/">Home</a></li>
   </ul>
-  <img class="pulse hide-on-med-and-down" src="images/logo.JPG" style="position:absolute; height:15%;width:auto;border-radius:50%;top:6%;left:45%;box-shadow:5px;">
-<br>
+  <a href="#" data-target="slide-out" class="hide-on-med-and-up sidenav-trigger"><i class="material-icons">menu</i></a>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+	var options={};
+    var instances = M.Sidenav.init(elems, options);
+  });
+</script>
