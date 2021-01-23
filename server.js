@@ -90,7 +90,7 @@ app.post('/register',function(req,res){
 app.get("/all_users",function(req,res){
 	User.find({},function(err,users){
 		if(!err)
-		res.send({found:users});
+		res.render({found:users});
 		else
 		res.send("err occured");
 });
