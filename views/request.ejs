@@ -1,0 +1,48 @@
+<html>
+<head>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+              <form  action="/request" method="post">
+        <table class="responsive-table centered striped">
+        <thead>
+          <tr>
+              <th>Accept/Decline</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Roll Number</th>
+              <th>Role</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% users.forEach((user) => { %>
+            <tr>
+              <td><p>
+      <label>
+        <input type="checkbox" name="checkb" value="<%=user.username%>" />
+        <span> </span>
+      </label>
+    </p></td>
+              <td><%=user.name%></td>
+              <td><%=user.username%></td>
+              <td><%=user.rollno%></td>
+              <td><%=user.role%></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <button class="btn waves-effect waves-light center" type="submit" name="action">Submit
+      <i class="material-icons right">lock_open</i>
+      </button>
+
+              </form>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js>
+	</script>
+</body>
+</html>

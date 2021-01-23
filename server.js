@@ -47,11 +47,7 @@ app.get('/login',function(req,res){
 
 
 app.get('/register',function(req,res){
-	//if(req.isAuthenticated())
-	res.render('register',{req});
-	//else {
-		//res.redirect('/login');
-//	}
+	res.render("register",{req});
 });
 
 app.get('/issue',function(req,res){
@@ -75,7 +71,10 @@ app.get("/dashboard",function(req,res){
 })
 
 app.post('/register',function(req,res){
-	User.register(new User({'name':req.body.name,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role}),req.body.password,function(err){
+	var confirmed= false;
+	if(req.user && req.user.role === 'Admin')
+		confirmed = true;
+	User.register(new User({'name':req.body.name,'confirmed':confirmed,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role}),req.body.password,function(err){
 		if(err)
 			console.log(err);
 		else{
@@ -108,14 +107,43 @@ app.post("/login",function(req,res){
 		res.redirect("/login");
 	  } else {
 		passport.authenticate("local") (req,res,function(){
+			if(req.user.confirmed === true)
 		  res.redirect("/dashboard");
-
+			else {
+				res.send("You are not confirmed by admin");
+			}
+			console.log(req.user);
 		});
 	  }
 	});
   });
 
+app.get('/request',function(req,res){
+	if(req.isAuthenticated()){
+		User.find({confirmed:false}, function(err, user){
+			if(err)
+			console.log(err);
+			else if (!user) {
+				res.send("None User without confirmed status!")
+			}
+			else {
+				res.render("request",{users:user});
+			}
+		})
+	}
+})
 
+app.post("/request", function(req,res){
+	const checkb = req.body.checkb;
+	User.findOneAndUpdate({username:checkb},{$set:{confirmed:true}}, function(err, user){
+		if(err)
+		console.log(err);
+		else if(!user)
+		res.send("No user find");
+		else
+		res.redirect("/dashboard")
+	})
+})
 
 	app.get('/deleteUser', function(req,res){
 		if(req.isAuthenticated()){
