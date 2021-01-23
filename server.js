@@ -88,12 +88,22 @@ app.post('/register',function(req,res){
 });
 
 app.get("/all_users",function(req,res){
-	User.find({},function(err,users){
-		if(!err)
-		res.render({found:users});
-		else
-		res.send("err occured");
-});
+	if(req.isAuthenticated()){
+		if(req.user.role === "Admin"){
+			User.find({},function(err,users){
+				if(!err)
+				res.render("users",{found:users});
+				else
+				res.send("err occured");
+		});
+		}
+		else {
+			res.send("You are Not Admin")
+		}
+	}
+	else {
+		res.redirect("/login")
+	}
 });
 
 app.post("/login",function(req,res){
