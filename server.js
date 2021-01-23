@@ -76,7 +76,7 @@ app.post('/register',function(req,res){
 		confirmed = true;
 	User.register(new User({'name':req.body.name,'confirmed':confirmed,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role}),req.body.password,function(err){
 		if(err)
-			console.log(err);
+		res.send("Opps Something Went Wrong")
 		else{
 			passport.authenticate("local")(req,res,function()
 			{
