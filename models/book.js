@@ -7,7 +7,8 @@ ShelfNo : {type:String},
 AccNo : {type:String},
 publisher : {type:String},
 category : {type:String},
-Status : {type: String, default:"Available"}
+Status : {type: String, default:"Available"},
+bibliographical_entry:String 
 });
 
 

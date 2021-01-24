@@ -75,8 +75,11 @@ app.post('/register',function(req,res){
 	if(req.user && req.user.role === 'Admin')
 		confirmed = true;
 	User.register(new User({'name':req.body.name,'confirmed':confirmed,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role}),req.body.password,function(err){
-		if(err)
-		res.send("Opps Something Went Wrong")
+		if(err){
+			res.send("Opps Something Went Wrong")
+			console.log(err);
+		}
+
 		else{
 			passport.authenticate("local")(req,res,function()
 			{
@@ -318,7 +321,8 @@ app.post("/book",function(req,res){
 		ShelfNo : req.body.ShelfNo,
 		AccNo : req.body.AccNo,
 		publisher : req.body.publisher,
-		category : req.body.category
+		category : req.body.category,
+		bibliographical_entry: req.body.be
 	});
 	newbook.save(function(err){
 		if(err){
