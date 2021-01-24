@@ -90,6 +90,28 @@ app.post('/register',function(req,res){
 	);
 });
 
+app.post('/csv_register', function(req, res){
+	if(req.body.code === 'lkshdfiohnaklsdnka'){
+		User.register(new User({'name':req.body.name,'confirmed':true,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role}),req.body.password,function(err){
+			if(err){
+				res.status(500).send("Opps Something Went Wrong")
+				console.log(err);
+			}
+
+			else{
+				passport.authenticate("local")(req,res,function()
+				{
+					console.log('registered');
+					res.send('thankyou');
+				});
+		}}
+		);
+	}
+	else {
+		res.status(401).send('unauthorized');
+	}
+})
+
 app.get("/all_users",function(req,res){
 	if(req.isAuthenticated()){
 		if(req.user.role === "Admin"){
