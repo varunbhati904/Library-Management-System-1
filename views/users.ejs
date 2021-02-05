@@ -56,13 +56,13 @@
           <tr>
             <td><%=found[i].name%></td>
             <td><%=found[i].rollno%></td>
-            <td><%=found[i].DOB%></td>
+            <td><%=(found[i].DOB||new Date("01/01/1970")).toDateString()%></td>
             <td><%=found[i].email%></td>
             <td><%=found[i].username%></td>
             <td><%=found[i].role%></td>
             <td><%=found[i].confirmed%></td>
-            <td><%=found[i].create%></td>
-            <td><%=found[i].expiry%></td>
+            <td><%=(found[i].create||new Date("01/01/1970")).toDateString()%></td>
+            <td><%=(found[i].expiry||new Date("01/01/1970")).toDateString()%></td>
             <td><%=found[i].Fine%></td>
           </tr>
         <%}%>

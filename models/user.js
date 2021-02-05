@@ -1,11 +1,12 @@
 var mongoose = require("mongoose");
 var date = new Date();
+var defdate = new Date("01/01/1970");
 var ndate = new Date();
 var passportLocalMongoose = require("passport-local-mongoose");
 var UserSchema = new mongoose.Schema({
 name :{type:String},
 rollno :{type:String},
-DOB : {type:Date},
+DOB : {type:Date, default:defdate},
 Fine : {type:Number,default:0},
 email : {type:String},
 username : {type:String},
