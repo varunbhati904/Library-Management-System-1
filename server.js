@@ -112,6 +112,83 @@ app.post('/csv_register', function(req, res){
 	}
 })
 
+app.get("/edit_profile", function(req, res){
+	if(req.isAuthenticated()){
+		if(req.user.confirmed === true)
+		res.render("edit_profile",{user:req.user})
+		else {
+			res.status(401).send("Your Status is not confirmed")
+		}
+	}
+	else {
+		res.redirect("/login");
+	}
+});
+
+app.post("/edit_profile",(req, res) =>{
+	const rollno = req.body.rollno;
+	const email = req.body.email;
+	const name = req.body.name;
+	if(req.user.confirmed === true){
+		User.update({username:req.user.username},{$set:{rollno:rollno,email:email,name:name}},(err)=>{
+			if(err)
+			res.status(500).send(err);
+			else {
+				res.render("thankyou");
+			}
+		})
+	}
+})
+
+app.get('/edit_book_accno', function(req, res){
+	if(req.isAuthenticated()){
+		if(req.user.role === "Admin")
+		res.render("edit_book_accno");
+		else {
+			res.status(401).send();
+		}
+	}
+	else {
+		res.status(404).send()
+	}
+})
+
+app.post("/edit_book_accno", function(req, res){
+	accno = req.body.accno;
+	if(req.isAuthenticated()){
+		if(req.user.role === "Admin"){
+			Book.findOne({AccNo:accno},(err,book)=>{
+				if(err)
+				res.status(500).send(err)
+				else {
+				res.render("edit_book",{book:book})
+				}
+			})
+		}
+		else {
+			res.status(401).send("You are not Admin");
+		}
+	}
+	else {
+		res.redirect("/login");
+	}
+});
+
+app.post("/edit_book",(req, res) =>{
+	const author = req.body.author;
+	const shelfNo = req.body.shelfno;
+	const name = req.body.name;
+	if(req.user.confirmed === true){
+		User.update({username:req.user.username},{$set:{ShelfNo:shelfNo,author:author,name:name}},(err)=>{
+			if(err)
+			res.status(500).send(err);
+			else {
+				res.render("thankyou");
+			}
+		})
+	}
+})
+
 app.get("/all_users",function(req,res){
 	if(req.isAuthenticated()){
 		if(req.user.role === "Admin"){
@@ -439,31 +516,37 @@ app.post("/deposit",function(req,res){
 		 }
 	 });
 });
-if(h === 12 && m === 0 && s === 0){
-	Issue.find({},function(err,found){
-		if(err){
-			console.log(err);
-		}else{
-			if(found){
-				console.log(found);
-				for(var i=0;i<found.length;i++){
-					if(found[i].Due_on > date){
-						User.findOneAndUpdate({username:found[i].username},{$inc:{Fine: 1}},function(err,user){
-							if(err){
-								console.log(err);
-							}else{
-								if(user){
-									console.log(user);
-							}
+app.get("/updatefine", function(req, res){
+	if(req.isAuthenticated()){
+		if(req.user.role === "Admin"){
+			Issue.find({},function(err,found){
+				if(err){
+					console.log(err);
+				}else{
+					if(found){
+						console.log(found);
+						for(var i=0;i<found.length;i++){
+							if(found[i].Due_on > date){
+								User.findOneAndUpdate({username:found[i].username},{$inc:{Fine: 1}},function(err,user){
+									if(err){
+										console.log(err);
+									}else{
+										if(user){
+											console.log(user);
+									}
+								}
+							})
 						}
-					})
+					}
+				}else{
+					res.send("No books are Issued");
 				}
-			}
-		}else{
-			res.send("No books are Issued");
+			}}
 		}
-	}})
+	})
 }
+}
+})
 
 app.listen(process.env.PORT||2000,function(err){
 	if(err)
