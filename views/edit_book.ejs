@@ -1,0 +1,60 @@
+<html>
+<head>
+	<title>Library Management System</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="materialize/css/materialize.css">
+</head>
+<body>
+	<%- include('partials/navbar') %>
+	<div class="card" style = "position:absolute;height:49%;width: 30%; left:35%;top:26%;border-radius: 6px;">
+	<div class="row">
+
+				<div class="row">
+					<form class="col s12" action='/edit_book' method='POST'>
+					  <div class="row">
+						<div class="input-field col s6">
+			  				<i class="material-icons prefix">supervisor_account</i>
+						  <input id="name" type="text" name="name" value="<%=book.name%>" class="validate">
+						  <label for="name" >Name</label>
+						</div>
+					   </div>
+					   
+					   <div class="row">
+						<div class="input-field col s6">
+			  				<i class="material-icons prefix">supervisor_account</i>
+						  <input id="name" type="text" name="accno" value="<%=book.AccNo%>" hidden class="validate">
+						  <label for="name" >Acc No.</label>
+						</div>
+					   </div>
+					   
+					   <div class="row">
+						<div class="input-field col s6">
+							<i class="material-icons prefix">assignment_ind</i>
+						  <input id="rollno" type="text" value="<%=book.author%>" name="author" class="validate">
+						  <label for="rollno">Author</label>
+						</div>
+					  </div>
+					  <div class="row">
+						  <div class="input-field col s6">
+							<i class="material-icons prefix">email</i>
+							<input id="email_inline" type="number" value=<%=book.ShelfNo||"0"%> name="shelfno">
+							<label for="email_inline">Shelf No.</label>
+								
+						</div>
+					  </div>
+
+					  <button class="btn waves-effect waves-light center" type="submit" name="action">Change
+						<i class="material-icons right">send</i>
+					  </button>
+					  <button class="btn waves-effect waves-light center" type="reset" name="action">Reset
+						<i class="material-icons right">loop</i>
+					  </button>
+					</form>
+				  </div>
+			</div>
+		  </div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+	</script>
+</body>
+</html>
