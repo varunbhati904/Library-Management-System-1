@@ -115,7 +115,7 @@ app.post('/csv_register', function(req, res){
 app.get("/edit_profile", function(req, res){
 	if(req.isAuthenticated()){
 		if(req.user.confirmed === true)
-		res.render("edit_profile",{user:req.user})
+		res.render("edit_profile",{user:req.user,req})
 		else {
 			res.status(401).send("Your Status is not confirmed")
 		}
@@ -143,13 +143,13 @@ app.post("/edit_profile",(req, res) =>{
 app.get('/edit_book_accno', function(req, res){
 	if(req.isAuthenticated()){
 		if(req.user.role === "Admin")
-		res.render("edit_book_accno");
+		res.render("edit_book_accno",{req});
 		else {
 			res.status(401).send();
 		}
 	}
 	else {
-		res.status(404).send()
+		res.status(401).send()
 	}
 })
 
@@ -161,7 +161,7 @@ app.post("/edit_book_accno", function(req, res){
 				if(err)
 				res.status(500).send(err)
 				else {
-				res.render("edit_book",{book:book})
+				res.render("edit_book",{book:book,req})
 				}
 			})
 		}
@@ -178,15 +178,18 @@ app.post("/edit_book",(req, res) =>{
 	const author = req.body.author;
 	const shelfNo = req.body.shelfno;
 	const name = req.body.name;
-	if(req.user.confirmed === true){
-		User.update({username:req.user.username},{$set:{ShelfNo:shelfNo,author:author,name:name}},(err)=>{
+	if(req.user.role === 'Admin'){
+		Book.update({AccNo:req.body.accno},{$set:{ShelfNo:shelfNo,author:author,name:name}},(err)=>{
 			if(err)
 			res.status(500).send(err);
 			else {
+				
 				res.render("thankyou");
 			}
 		})
 	}
+	else
+		res.status(401).send()
 })
 
 app.get("/all_users",function(req,res){
@@ -522,6 +525,7 @@ app.get("/updatefine", function(req, res){
 			Issue.find({},function(err,found){
 				if(err){
 					console.log(err);
+					res.status(500).send()
 				}else{
 					if(found){
 						console.log(found);
@@ -530,22 +534,28 @@ app.get("/updatefine", function(req, res){
 								User.findOneAndUpdate({username:found[i].username},{$inc:{Fine: 1}},function(err,user){
 									if(err){
 										console.log(err);
+										res.status(500).send()
 									}else{
-										if(user){
+
 											console.log(user);
-									}
+											
+									
 								}
 							})
 						}
 					}
-				}else{
-					res.send("No books are Issued");
+					res.render("thankyou");
 				}
-			}}
+				else
+					res.render("thankyou");
+			}})
 		}
-	})
-}
-}
+		else
+		res.status(401).send();
+	}
+	else
+		res.status(401).send();
+
 })
 
 app.listen(process.env.PORT||2000,function(err){

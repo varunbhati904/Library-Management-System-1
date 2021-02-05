@@ -10,25 +10,26 @@
 	<div class="row">
 
 				<div class="row">
-					<form class="col s12" action='/register' method='POST'>
+					<form class="col s12" action='/edit_profile' method='POST'>
 					  <div class="row">
 						<div class="input-field col s6">
 			  				<i class="material-icons prefix">supervisor_account</i>
-						  <input id="name" type="text" name="name" class="validate">
+						  <input id="name" type="text" value="<%=user.name%>" name="name" class="validate">
 						  <label for="name" >Name</label>
 						</div>
 					   </div>
 					   <div class="row">
 						<div class="input-field col s6">
 							<i class="material-icons prefix">assignment_ind</i>
-						  <input id="rollno" type="text" name="rollno" class="validate">
+						  <input id="rollno" type="text" value=<%=user.rollno%> name="rollno" class="validate">
 						  <label for="rollno">Roll Number</label>
 						</div>
 					  </div>
 					  <div class="row">
 						  <div class="input-field col s6">
 							<i class="material-icons prefix">email</i>
-							<input id="email_inline" type="email" name="email" class="validate">
+							<%console.log(user)%>
+							<input id="email_inline" type="email" value=<%=user.email||"None"%>	 name="email" class="validate">
 							<label for="email_inline">Email</label>
 							<span class="helper-text" data-error="wrong" data-success="right"></span>
 						</div>
