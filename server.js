@@ -74,7 +74,7 @@ app.post('/register',function(req,res){
 	var confirmed= false;
 	if(req.user && req.user.role === 'Admin')
 		confirmed = true;
-	User.register(new User({'name':req.body.name,'confirmed':confirmed,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role}),req.body.password,function(err){
+	User.register(new User({'name':req.body.name,'confirmed':confirmed,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role, 'expiry':req.body.expiry}),req.body.password,function(err){
 		if(err){
 			res.send("Opps Something Went Wrong")
 			console.log(err);
@@ -183,7 +183,7 @@ app.post("/edit_book",(req, res) =>{
 			if(err)
 			res.status(500).send(err);
 			else {
-				
+
 				res.render("thankyou");
 			}
 		})
@@ -538,8 +538,8 @@ app.get("/updatefine", function(req, res){
 									}else{
 
 											console.log(user);
-											
-									
+
+
 								}
 							})
 						}
