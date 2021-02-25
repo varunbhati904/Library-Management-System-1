@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> 
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
 <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 <script>
@@ -35,6 +35,8 @@ xhttp.onreadystatechange = function() {
     }
 	else if(this.readyState == 4 && this.status == 200)
 	console.log( xhttp.responseText);
+  else if(this.readyState == 4 && this.status == 401)
+	alert("Already Issued");
 };
 xhttp.open("POST", "/issueapi", true);
 
@@ -59,7 +61,7 @@ xhttp.send(data);
           <div class="col-sm-8">
             <div class="card">
               <div class="card-body">
-      
+
                 <!-- Makes POST request to /register route -->
                 <form onsubmit="send(this.accno.value);return false">
                   <div class="form-group">
@@ -67,10 +69,10 @@ xhttp.send(data);
                       <label for="AccNo">Account Number of Book</label>
                       <input type="text" class="form-control" name="accno">
                     </div>
-                    
+
                   <button type="submit" class="btn btn-dark">Issue</button>
                 </form>
-      
+
             </div>
           </div>
         </div>
