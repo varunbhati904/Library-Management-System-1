@@ -19,7 +19,7 @@ Book=require('./models/book');
 Issue=require('./models/issue');
 
 app.use(require('express-session')({
-    secret: "sih2021lms",
+    secret: "sih2021",
     resave: false,
     saveUninitialized: false,
 }));
