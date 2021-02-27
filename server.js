@@ -71,23 +71,27 @@ app.get("/dashboard",function(req,res){
 })
 
 app.post('/register',function(req,res){
-	var confirmed= false;
-	if(req.user && req.user.role === 'Admin')
-		confirmed = true;
-	User.register(new User({'name':req.body.name,'confirmed':confirmed,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role, 'expiry':req.body.expiry}),req.body.password,function(err){
-		if(err){
-			res.send("Opps Something Went Wrong")
-			console.log(err);
-		}
+	try{
+		var confirmed= false;
+		if(req.user && req.user.role === 'Admin')
+			confirmed = true;
+		User.register(new User({'name':req.body.name,'confirmed':confirmed,'username':req.body.username,'email':req.body.email,'DOB':req.body.DOB,'rollno':req.body.rollno, 'role':req.body.role, 'expiry':req.body.expiry}),req.body.password,function(err){
+			if(err){
+				res.send("Opps Something Went Wrong")
+				console.log(err);
+			}
 
-		else{
-			passport.authenticate("local")(req,res,function()
-			{
-				console.log('registered');
-				res.render('thankyou',{req});
-			});
-	}}
-	);
+			else{
+				passport.authenticate("local")(req,res,function()
+				{
+					console.log('registered');
+					res.render('thankyou',{req});
+				});
+		}}
+		);
+	}catch(err){
+		res.status(500).send(err.name);
+	}
 });
 
 app.post('/csv_register', function(req, res){
