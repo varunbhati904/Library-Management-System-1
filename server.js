@@ -85,7 +85,7 @@ app.post('/register',function(req,res){
 				passport.authenticate("local")(req,res,function()
 				{
 					console.log('registered');
-					res.render('thankyou',{req});
+					res.render('thankyou',{req, msg:"User Registered"});
 				});
 		}}
 		);
@@ -138,7 +138,7 @@ app.post("/edit_profile",(req, res) =>{
 			if(err)
 			res.status(500).send(err);
 			else {
-				res.render("thankyou");
+				res.render("thankyou",{msg:"Profile Edited"});
 			}
 		})
 	}
@@ -188,7 +188,7 @@ app.post("/edit_book",(req, res) =>{
 			res.status(500).send(err);
 			else {
 
-				res.render("thankyou");
+				res.render("thankyou",{msg:"Book Edited"});
 			}
 		})
 	}
@@ -265,8 +265,26 @@ app.post("/request", function(req,res){
 })
 
 	app.get('/deleteUser', function(req,res){
-		if(req.isAuthenticated()){
+		if(req.isAuthenticated()&&req.user.role=="Admin"){
 			res.render("delete",{req});
+		}
+		else {
+			res.redirect("/login");
+		}
+	})
+	
+	app.get('/circulation', function(req,res){
+		if(req.isAuthenticated()&&req.user.role=="Admin"){
+			res.render("circulation",{req});
+		}
+		else {
+			res.redirect("/login");
+		}
+	})
+	
+	app.get('/administration', function(req,res){
+		if(req.isAuthenticated()&&req.user.role=="Admin"){
+			res.render("administration",{req});
 		}
 		else {
 			res.redirect("/login");
@@ -567,10 +585,10 @@ app.post("/updatefine",async function(req, res){
 							})
 						}
 					}
-					res.render("thankyou");
+					res.render("thankyou",{msg:"Fine Updated"});
 				}
 				else
-					res.render("thankyou");
+					res.render("thankyou",{msg:"Updated"});
 			}})
 		}
 		else

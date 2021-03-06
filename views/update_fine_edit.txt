@@ -12,7 +12,7 @@
 <br><br><br>
   <div class="row">
     <form class="col s8 offset-s2" action="/updatefine" method="post">
-      <h3 style="text-align: center;color: teal;text-decoration: underline;"><b>Update Book </b></h3><br><br>
+      <h3 style="text-align: center;color: teal;text-decoration: underline;"><b>Update Fine </b></h3><br><br>
       <div class="row">
         <div class="input-field col s12">
           <input  placeholder="Fine" class="materialize-textarea col s11" name="fine" autofocus></textarea>
