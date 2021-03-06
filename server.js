@@ -523,9 +523,30 @@ app.post("/deposit",function(req,res){
 		 }
 	 });
 });
+
 app.get("/updatefine", function(req, res){
 	if(req.isAuthenticated()){
 		if(req.user.role === "Admin"){
+			Fine.find({},function(err, found){
+				if(err)
+				res.status(500).send(err);
+				else if(!found)
+				res.status(404).send("Not Found")
+				else {
+					res.render("update_fine_edit",{data:found[0]})
+				}
+			})
+		}
+	}
+})
+
+app.post("/updatefine",async function(req, res){
+	fine = req.body.fine;
+	if(req.isAuthenticated()){
+		if(req.user.role === "Admin"){
+			const updateFine = await Fine.update({},{$set:{fine:fine}});
+			if(!updateFine)
+			res.status(404).send("Not Updated");
 			Issue.find({},function(err,found){
 				if(err){
 					console.log(err);
@@ -535,15 +556,13 @@ app.get("/updatefine", function(req, res){
 						console.log(found);
 						for(var i=0;i<found.length;i++){
 							if(found[i].Due_on > date){
-								User.findOneAndUpdate({username:found[i].username},{$inc:{Fine: 1}},function(err,user){
+								User.findOneAndUpdate({username:found[i].username},{$inc:{Fine: fine}},function(err,user){
 									if(err){
 										console.log(err);
 										res.status(500).send()
 									}else{
 
 											console.log(user);
-
-
 								}
 							})
 						}
